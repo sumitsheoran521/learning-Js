@@ -122,3 +122,4 @@ const calcAverage = function(arr){
     return average;
 }
 console.log(calcAverage(totals));
+console.log(calcAverage(tips));
