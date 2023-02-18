@@ -286,5 +286,10 @@ for (const mov of movements) {
   }
 }
 console.log(depositFor);
+
+const withdrawals = movements.filter((mov) => {
+  return mov < 0;
+});
+console.log(withdrawals);
 // Next Video
 // reduce: reduce boils ("reduces") all array elements down to one single value (e.g. adding all elements together)
