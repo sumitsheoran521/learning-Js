@@ -73,6 +73,37 @@ const displayMovements = function (movements) {
 };
 displayMovements(account1.movements);
 
+const calcDisplayBalance = (movements) => {
+  const balance = movements.reduce((acc, mov) => {
+    return acc + mov;
+  }, 0);
+  labelBalance.textContent = `${balance}₹`;
+};
+
+calcDisplayBalance(account1.movements);
+
+const calcDisplaySummary = function (movements) {
+  const incomes = movements
+    .filter((mov) => mov > 0)
+    .reduce((acc, mov) => acc + mov, 0);
+  labelSumIn.textContent = `${incomes}₹`;
+
+  const outgoing = movements
+    .filter((mov) => mov < 0)
+    .reduce((acc, mov) => acc + mov, 0);
+  labelSumOut.textContent = `${Math.abs(outgoing)}₹`;
+
+  const interest = movements
+    .filter((mov) => mov > 0)
+    .map((deposit) => (deposit * 1.2) / 100)
+    .filter((int, i, arr) => {
+      return int >= 1;
+    })
+    .reduce((acc, int) => acc + int, 0);
+  labelSumInterest.textContent = `${interest}₹`;
+};
+calcDisplaySummary(account1.movements);
+
 const createUsernames = (accs) => {
   accs.forEach((acc) => {
     acc.username = acc.owner
@@ -83,7 +114,6 @@ const createUsernames = (accs) => {
   });
 };
 createUsernames(accounts); // aks
-// console.log(accounts);
 
 //////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////
@@ -269,6 +299,7 @@ console.log(movementsDescripitoions);
 
 */
 
+/*
 // Next Video
 // filter: filter returns a new array containing the array elements that passed a specified test condition.
 const deposits = movements.filter((mov) => {
@@ -291,5 +322,119 @@ const withdrawals = movements.filter((mov) => {
   return mov < 0;
 });
 console.log(withdrawals);
+*/
+
+/*
 // Next Video
 // reduce: reduce boils ("reduces") all array elements down to one single value (e.g. adding all elements together)
+// accumulator: is like snowball
+const balance = movements.reduce(function(accu, curr, i, arr){
+  console.log(`Iteration ${i}: ${accu} = ${curr}`);
+  return accu + curr;
+},0) // 0 is default value
+console.log(balance);
+
+let balance2 = 0;
+for(const mov of movements){
+  balance2 += mov;
+}
+console.log(balance2);
+
+// Maximum value
+const max = movements.reduce((acc, mov)=> {
+  if(acc > mov){
+    return acc;
+  }
+  else {
+    return mov;
+  }
+}, movements[0])
+console.log(max);
+*/
+
+// Next Video
+// Coding Challenge
+/* 
+Let's go back to Julia and Kate's study about dogs. This time, they want to convert dog ages to human ages and calculate the average age of the dogs in their study.
+Create a function 'calcAverageHumanAge', which accepts an arrays of dog's ages ('ages'), and does the following things in order:
+1. Calculate the dog age in human years using the following formula: if the dog is <= 2 years old, humanAge = 2 * dogAge. If the dog is > 2 years old, humanAge = 16 + dogAge * 4.
+2. Exclude all dogs that are less than 18 human years old (which is the same as keeping dogs that are at least 18 years old)
+3. Calculate the average human age of all adult dogs (you should already know from other challenges how we calculate averages 😉)
+4. Run the function for both test datasets
+TEST DATA 1: [5, 2, 4, 1, 15, 8, 3]
+TEST DATA 2: [16, 6, 10, 5, 6, 1, 4]
+GOOD LUCK 😀
+
+const calcAverageHumanAge = function (ages) {
+  const humanAge = ages.map((age, i) => {
+    if (age <= 2) {
+      return 2 * age;
+    } else if (age > 2) {
+      return 16 + age * 4;
+    }
+  });
+  const adult = humanAge.filter((age) => {
+    if (age >= 18) {
+      return age;
+    }
+  });
+  console.log(humanAge);
+  console.log(adult);
+  const averageAge = adult.reduce((acc, age) => {
+    return acc + age / adult.length;
+  }, 0);
+  return averageAge;
+};
+const avg1 = calcAverageHumanAge([5, 2, 4, 1, 15, 8, 3]);
+const avg2 = calcAverageHumanAge([16, 6, 10, 5, 6, 1, 4]);
+console.log("-----------------------------");
+console.log(avg1);
+console.log(avg2);
+
+*/
+
+/*
+// Next Video
+// The magic of chaining methods
+const usdToINR = 83.5;
+// PIPELINE
+const totalDepositsINR = movements
+  .filter((mov) => mov > 0)
+  .map((mov) => mov * usdToINR)
+  .reduce((acc, mov) => acc + mov, 0);
+console.log(totalDepositsINR);
+*/
+
+// Next Video
+// Coding Challenge #3
+
+/* 
+Rewrite the 'calcAverageHumanAge' function from the previous challenge, but this time as an arrow function, and using chaining!
+TEST DATA 1: [5, 2, 4, 1, 15, 8, 3]
+TEST DATA 2: [16, 6, 10, 5, 6, 1, 4]
+GOOD LUCK 😀
+console.log('------------------');
+const calcAverageHumanAge = (ages) =>
+  ages
+    .map((age) => (age <= 2 ? 2 * age : 16 + age * 4))
+    .filter((age) => age >= 18)
+    .reduce((acc, age, i, arr) => acc + age / arr.length, 0);
+const avg1 = calcAverageHumanAge([5, 2, 4, 1, 15, 8, 3]);
+const avg2 = calcAverageHumanAge([16, 6, 10, 5, 6, 1, 4]);
+console.log(avg1);
+console.log(avg2);
+    
+*/
+
+/*
+// Next Video
+// The FIND Method: it will return the first element of the array for which this operation here is true.
+// It is same as filter method but the main difference is filter return new array but find only return the element itself not the array.
+const aa = movements.find((mov) => mov < 0); // It will return the first withdrawl
+// console.log(aa);
+
+
+console.log(accounts);
+const account = accounts.find(acc => acc.owner === 'Archana Redhu');
+console.log(account);
+*/
