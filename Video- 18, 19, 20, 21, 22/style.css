@@ -198,7 +198,7 @@ nav {
 }
 
 .btn--sort {
-  margin-left: auto;
+  margin-left: 0.8rem;
   border: none;
   background: none;
   font-size: 1.3rem;
