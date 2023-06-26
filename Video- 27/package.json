@@ -1,0 +1,22 @@
+{
+  "name": "video--27",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build index.html"
+  },
+  "author": "Sumit",
+  "license": "ISC",
+  "dependencies": {
+    "core-js": "^3.31.0",
+    "leaflet": "^1.9.4",
+    "lodash-es": "^4.17.21",
+    "regenerator-runtime": "^0.13.11"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.22.5",
+    "parcel": "^2.9.3",
+    "process": "^0.11.10"
+  }
+}
